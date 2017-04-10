@@ -1,0 +1,3 @@
+export const USER_LOGIN = 'USER_LOGIN'
+export const CLEAR_LOGIN_FAILURE = 'CLEAR_LOGIN_FAILURE'
+export const DELETE_ERROR = 'DELETE_ERROR'
