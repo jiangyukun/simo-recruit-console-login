@@ -32,6 +32,18 @@ body {
     }
 }
 
+.input {
+    width: 100%;
+    border: 1px solid #cfdadd;
+    border-radius: 3px;
+    padding: 5px 10px;
+    outline: none;
+
+    &:focus {
+        border: 1px solid #00a854;
+    }
+}
+
 .btn {
     display: inline-block;
     padding: 6px 12px;
@@ -66,4 +78,21 @@ body {
     filter: alpha(opacity=65);
     box-shadow: none;
     opacity: .65;
+}
+
+.flex {
+    display: flex;
+    &.middle {
+        align-content: center;
+    }
+}
+
+.flex1 {
+    flex: 1;
+}
+
+.line {
+    margin: 15px 0;
+    height: 1px;
+    background: #e8e8e8;
 }

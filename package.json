@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "app-core": "0.1.0",
     "babel-loader": "^6.4.1",
     "babel-plugin-check-es2015-constants": "^6.22.0",
     "babel-plugin-transform-class-properties": "^6.23.0",
@@ -51,20 +52,14 @@
   "dependencies": {
     "babel-polyfill": "^6.23.0",
     "classnames": "^2.2.5",
-    "d3-array": "^1.1.1",
-    "d3-color": "^1.0.3",
-    "d3-scale": "^1.0.5",
-    "d3-selection": "^1.0.5",
-    "d3-shape": "^1.0.6",
-    "d3-transition": "^1.0.4",
-    "dom-helpers": "^3.2.1",
     "immutable": "^3.8.1",
     "isomorphic-fetch": "^2.2.1",
+    "md5": "^2.2.1",
+    "prop-types": "^15.5.8",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.3",
-    "redux": "^3.6.0",
-    "redux-saga": "^0.14.3"
+    "redux": "^3.6.0"
   },
   "scripts": {
     "dev": "node server.js",

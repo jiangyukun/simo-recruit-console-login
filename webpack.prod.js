@@ -1,31 +1,33 @@
+const path = require('path')
 const webpack = require('webpack')
 const moment = require('moment')
-process.env.NODE_ENV = 'production'
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = [
   {
     entry: [
-      './src/js/main/index.js'
+      './src/index.js'
     ],
 
     output: {
-      path: 'build',
+      path: path.join(__dirname, 'build'),
       filename: 'bundle-' + moment().format('MMDD') + '.min.js',
       publicPath: 'build/'
     },
 
     module: {
       loaders: [
-        {test: /\.js$/, loaders: ['babel'], exclude: /node_modules/, include: __dirname},
-        {test: /\.scss$/, loader: 'style!css!autoprefixer!sass'},
-        {test: /\.(jpg|png)$/, loader: "url?limit=8192"},
-        {test: /\.svg$/, loader: "file"}
+        {test: /\.js$/, loaders: ['babel-loader'], exclude: /node_modules/, include: __dirname},
+        {test: /\.less$/, loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: ['css-loader', 'less-loader']})},
+        {test: /\.scss$/, loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: ['css-loader', 'sass-loader']})},
+        {test: /\.(jpg|png|svg)$/, loader: "url-loader?limit=8192"},
+        {test: /\.(eot|woff|woff2|ttf)([\?]?.*)$/, loader: "file-loader"}
       ]
     },
 
     plugins: [
-      new webpack.optimize.OccurenceOrderPlugin(),
-      new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)}),
+      new ExtractTextPlugin('style-' + moment().format('MMDD') + '.min.css'),
+      new webpack.DefinePlugin({'process.env.NODE_ENV': '"production"'}),
       new webpack.optimize.UglifyJsPlugin({
         compress: {
           warnings: false
