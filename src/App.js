@@ -5,9 +5,10 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import md5 from 'md5'
 
+import MessageManage, {MESSAGE_TYPE} from 'app-core/message'
 import ChangePassword from './ChangePassword'
 
-import {login, clearFailureMessage, clearLoginSuccess, changePassword, clearChangePassword} from './actions/app.action'
+import * as actions from './actions/app.action'
 
 class App extends Component {
   state = {
@@ -35,15 +36,19 @@ class App extends Component {
       if (this.state.password == '123456') {
         this.setState({showChangePwd: true})
       } else {
-        location.href = '../simo-recruit-console/index'
+        if (location.href.indexOf('/inline/') != -1) {
+          location.href = '../../recruit-console/inline/index'
+        } else {
+          location.href = '../recruit-console/index'
+        }
       }
     }
     if (this.props.failureMessage) {
       this.props.clearFailureMessage()
-      alert(this.props.failureMessage)
     }
     if (this.props.changePasswordSuccess) {
       this.props.clearChangePassword()
+      this.props.showMessage({msgType: MESSAGE_TYPE.SUCCESS, content: '修改密码成功！'})
     }
   }
 
@@ -55,9 +60,13 @@ class App extends Component {
             <ChangePassword
               changePassword={this.props.changePassword}
               changePasswordSuccess={this.props.changePasswordSuccess}
+              showMessage={this.props.showMessage}
               onExited={() => this.setState({showChangePwd: false})}/>
           )
         }
+        <div className="message-container">
+          <MessageManage messageList={this.props.msgQueue} changeMessageStatus={this.props.changeMessageStatus}/>
+        </div>
         <div className="app-container">
           <h1 className="app-name">思默招募登录</h1>
           <form className="login-form" autoComplete="false">
@@ -88,4 +97,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {login, clearFailureMessage, clearLoginSuccess, changePassword, clearChangePassword})(App)
+export default connect(mapStateToProps, actions)(App)

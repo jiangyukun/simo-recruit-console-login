@@ -1,0 +1,17 @@
+@keyframes slide-down {
+    from {
+        top: -100px;
+    }
+    to {
+        top: 0;
+    }
+}
+
+@keyframes slide-up {
+    from {
+        top: 0;
+    }
+    to {
+        top: -100px;
+    }
+}

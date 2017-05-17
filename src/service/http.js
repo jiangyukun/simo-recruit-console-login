@@ -5,7 +5,7 @@ import {bodyParam} from '../core/utils'
 
 function preHandle(url, option) {
   if (process.env.NODE_ENV != 'dev') {
-    url = '' + url
+    url = '/simo' + url
   }
   option = option || {}
   if (!option.type) {
